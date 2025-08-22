@@ -1,12 +1,148 @@
-# Developer quickstart
+# GPT-5 MCP Server - Quick Start Guide
 
-Take your first steps with the OpenAI API.
+Get up and running with the GPT-5 MCP server for Claude Code and Claude Desktop in minutes.
 
-The OpenAI API provides a simple interface to state-of-the-art AI [models](/docs/models) for text generation, natural language processing, computer vision, and more. This example generates [text output](/docs/guides/text) from a prompt, as you might using [ChatGPT](https://chatgpt.com).
+## 🚀 Fastest Setup (Recommended)
 
-Generate text from a model
+**Interactive setup wizard handles everything for you:**
 
-```javascript
+```bash
+git clone https://github.com/andreahaku/gpt5_mcp
+cd gpt5-mcp
+npm install
+npm run build
+npm run setup
+```
+
+The wizard will:
+- ✅ Guide you through API key setup with validation
+- ✅ Help choose the best fallback model for your needs
+- ✅ Configure cost limits and AI behavior
+- ✅ Test your access to OpenAI models
+- ✅ Generate ready-to-use Claude configurations
+- ✅ Provide step-by-step setup instructions
+
+**Prerequisites:**
+- OpenAI API key ([get one here](https://platform.openai.com/api-keys))
+- [Verified OpenAI organization](https://help.openai.com/en/articles/10910291-api-organization-verification) (required for GPT-5)
+- Node.js 18+ and npm
+
+## 🤖 Using the MCP Server
+
+Once configured, you can use these tools in Claude Code or Claude Desktop:
+
+### Basic GPT-5 Consultation
+
+Ask GPT-5 for help with any task:
+
+```
+"Use GPT-5 to explain quantum computing in simple terms"
+"Ask GPT-5 to review this code for security issues"
+"Get GPT-5's help with optimizing this database query"
+```
+
+### File Analysis
+
+Process files through Claude Code's @ syntax:
+
+```
+"@config.json Ask GPT-5 to review this configuration for security issues"
+"@screenshot.png What UI improvements would GPT-5 suggest for this design?"
+"@document.pdf Summarize the key points from this report using GPT-5"
+```
+
+### Multi-turn Conversations
+
+Start persistent conversations with GPT-5:
+
+```
+"Start a GPT-5 conversation about database optimization"
+"Continue the conversation: What about indexing strategies?"
+"Continue: How does this apply to time-series data?"
+```
+
+### Cost Management
+
+Monitor your OpenAI API usage:
+
+```
+"Get cost report for today"
+"Show my current spending limits"
+"Get usage breakdown for this week"
+```
+
+## 🔧 Manual Setup (Advanced)
+
+If you prefer manual configuration, see the [full README](../README.md#-advanced-setup-manual) for detailed instructions.
+
+## 📋 Available MCP Tools
+
+The server provides these tools for Claude Code and Claude Desktop:
+
+### 1. `consult_gpt5`
+Get GPT-5 assistance with advanced reasoning.
+
+**Parameters:**
+- `prompt` (required): Your question or task
+- `reasoning_effort`: minimal, low, medium, or high (default: high)
+- `max_tokens`: Maximum response length (default: 20000)
+- `task_budget`: USD limit for this specific task
+- `confirm_spending`: Proceed even if over daily limit
+
+### 2. `start_conversation`
+Begin a multi-turn conversation.
+
+**Parameters:**
+- `topic` (required): What the conversation is about
+- `instructions`: Optional system-level guidance
+
+### 3. `continue_conversation`
+Continue an existing conversation.
+
+**Parameters:**
+- `conversation_id` (required): ID from start_conversation
+- `message` (required): Your next message
+
+### 4. `get_cost_report`
+View usage statistics and costs.
+
+**Parameters:**
+- `period`: current_task, today, week, or month
+
+### 5. `set_cost_limits`
+Configure spending limits.
+
+**Parameters:**
+- `daily_limit`: Maximum daily spending in USD
+- `task_limit`: Maximum per-task spending in USD
+
+## 🚨 Troubleshooting
+
+### Common Issues
+
+**Setup wizard fails:**
+- Ensure you have Node.js 18+ installed
+- Check that your OpenAI API key is valid and starts with `sk-`
+- Verify your organization is verified for GPT-5 access
+
+**Server not appearing in Claude:**
+- Make sure you completely restart Claude Desktop
+- Verify the configuration file path is correct
+- Check that `dist/index.js` exists (run `npm run build`)
+
+**API errors:**
+- Confirm your API key has sufficient credits
+- Some models require special access or verification
+- Try a different fallback model if access is denied
+
+**Need help?**
+- Check the [main README](../README.md) for detailed troubleshooting
+- Verify OpenAI API status at https://status.openai.com/
+- Review OpenAI's [organization verification guide](https://help.openai.com/en/articles/10910291-api-organization-verification)
+
+## Examples and Inspiration
+
+Below are some advanced examples showing what's possible with the GPT-5 Responses API directly (this MCP server provides a Claude-friendly interface to these capabilities):
 import OpenAI from "openai";
 const client = new OpenAI();
 
