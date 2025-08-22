@@ -57,3 +57,6 @@ Desktop.ini
 # Debug
 .vscode-test/
 *.vsix
+
+# Setup wizard development files
+docs/interactive_setup_plan.md
